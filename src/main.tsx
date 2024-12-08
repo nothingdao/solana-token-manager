@@ -6,6 +6,9 @@ import { App } from './App'
 import { WalletContextProvider } from './components/WalletContext'
 import { StyleProvider } from './components/StyleContext'
 
+// Add Buffer polyfill
+import { Buffer } from 'buffer';
+window.Buffer = Buffer;
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

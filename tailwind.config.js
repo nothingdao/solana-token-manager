@@ -11,223 +11,129 @@ export default {
   daisyui: {
     themes: [
       {
-        cyberpunk: {
-          "primary": "#ff7598",
-          "secondary": "#75d1f0",
-          "accent": "#c07eec",
-          "neutral": "#291334",
-          "base-100": "#1d1021",
-          "base-200": "#2a1929",
-          "base-300": "#3a2a3a",
-          "info": "#66c6ff",
-          "success": "#87d039",
-          "warning": "#e2d562",
-          "error": "#ff1640",
+        day: {
+          primary: "#FF5A5F",
+          secondary: "#00C2E0",
+          accent: "#FFCA28",
+          neutral: "#303841",
+          "base-100": "#FFFFFF",
+          "base-200": "#F7FAFC",
+          "base-300": "#EDF2F7",
+          info: "#00B8D4",
+          success: "#18DB93",
+          warning: "#FFB024",
+          error: "#ED4A31",
 
+          // Day theme overrides
           "*": {
-            "font-family": "'Rajdhani', sans-serif",
-            "border-color": "#6B1C67",
+            "font-family": "'Poppins', sans-serif",
           },
           ".btn": {
-            "border-width": "2px",
-            "border-color": "currentColor",
+            "border-radius": "0.5rem",
             "text-transform": "uppercase",
-            "font-weight": "700",
+            "font-weight": "600",
+            "transition": "all 0.3s ease",
+            "box-shadow": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
             "&:hover": {
+              "box-shadow": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
               "transform": "translateY(-2px)",
-              "box-shadow": "0 10px 20px -10px var(--primary)",
-            }
+            },
           },
           ".card": {
-            "background": "linear-gradient(45deg, var(--base-200), var(--base-300))",
-            "border": "2px solid",
-            "border-color": "var(--primary)",
+            "border-radius": "1rem",
+            "box-shadow": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+            "background": "linear-gradient(135deg, var(--base-100), var(--base-200))",
           },
           ".navbar": {
-            "background": "linear-gradient(180deg, var(--base-100), var(--base-200))",
-            "border-bottom": "2px solid var(--primary)",
+            "background": "linear-gradient(90deg, var(--base-100), var(--base-200))",
+            "box-shadow": "0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 4px 6px -1px rgba(0, 0, 0, 0.1)",
           },
           ".wallet-btn": {
-            "border": "2px solid var(--primary)",
-            "background": "linear-gradient(45deg, var(--base-200), var(--base-300))",
-            "text-transform": "uppercase",
-            "position": "relative",
-            "overflow": "hidden",
-            "&:hover": {
-              "transform": "scale(1.02)",
-              "box-shadow": "0 0 15px var(--primary)",
-              "&::before": {
-                "content": "''",
-                "position": "absolute",
-                "top": "-50%",
-                "left": "-50%",
-                "width": "200%",
-                "height": "200%",
-                "background": "linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent)",
-                "transform": "rotate(45deg)",
-                "animation": "cyber-glint 2s infinite",
-              }
-            }
-          }
-        },
-
-        minimal: {
-          "primary": "#000000",
-          "secondary": "#333333",
-          "accent": "#666666",
-          "neutral": "#000000",
-          "base-100": "#FFFFFF",
-          "base-200": "#FAFAFA",
-          "base-300": "#F5F5F5",
-          "info": "#000000",
-          "success": "#000000",
-          "warning": "#000000",
-          "error": "#000000",
-
-          // Minimal style overrides
-          "*": {
-            "font-family": "'Space Grotesk', sans-serif",
-          },
-          ".btn": {
-            "border-radius": "0",
-            "text-transform": "none",
-            "font-weight": "400",
-            "border": "1px solid #000000",
-            "background": "none",
-            "transition": "all 0.2s ease",
-            "&:hover": {
-              "background": "#000000",
-              "color": "#FFFFFF",
-            }
-          },
-          ".card": {
-            "border-radius": "0",
-            "border": "1px solid #000000",
-            "box-shadow": "none",
-          },
-          ".navbar": {
-            "border-bottom": "1px solid #000000",
-          },
-          ".modal": {
-            "border-radius": "0",
-            "border": "1px solid #000000",
-          }
-        },
-
-        playful: {
-          "primary": "#FF6B6B",
-          "secondary": "#4ECDC4",
-          "accent": "#FFE66D",
-          "neutral": "#2C2C2C",
-          "base-100": "#FFFFFF",
-          "base-200": "#FFF5F5",
-          "base-300": "#FFEDED",
-          "info": "#45B7D1",
-          "success": "#47D185",
-          "warning": "#FFB84C",
-          "error": "#FF6B6B",
-
-          "*": {
-            "font-family": "'Quicksand', sans-serif",
-          },
-          ".btn": {
-            "border-radius": "999px",
-            "font-weight": "700",
-            "padding": "0.5rem 1.5rem",
-            "&:hover": {
-              "transform": "translateY(-2px)",
-              "box-shadow": "0 10px 20px -10px var(--primary)",
-            }
-          },
-          ".card": {
-            "border-radius": "2rem",
-            "box-shadow": "0 20px 25px -5px rgba(0, 0, 0, 0.1)",
+            "background": "linear-gradient(135deg, var(--primary), var(--secondary))",
+            "color": "var(--base-100)",
             "border": "none",
+            "text-shadow": "0 1px 2px rgba(0, 0, 0, 0.2)",
+            "transition": "all 0.3s ease",
+            "&:hover": {
+              "transform": "scale(1.05)",
+              "box-shadow": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+            },
           },
-          // Fixed modal positioning
-          ".modal": {
-            "position": "fixed",
-            "top": "50%",
-            "left": "50%",
-            "transform": "translate(-50%, -50%)",
-            "border-radius": "2rem",
-            "max-width": "90vw",
-            "max-height": "90vh",
-            "overflow-y": "auto",
-            "background": "var(--base-100)",
-            "box-shadow": "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-          }
         },
 
-        brutalist: {
-          "primary": "#0000FF",
-          "secondary": "#FF0000",
-          "accent": "#00FF00",
-          "neutral": "#000000",
-          "base-100": "#FFFFFF",
-          "base-200": "#FFFFFF",
-          "base-300": "#CCCCCC",
-          "info": "#0000FF",
-          "success": "#00FF00",
-          "warning": "#FF0000",
-          "error": "#FF0000",
+        night: {
+          primary: "#8B5CF6", // Purple
+          secondary: "#22D3EE", // Cyan
+          accent: "#FBBF24", // Yellow
+          neutral: "#4B5563", // Gray
+          "base-100": "#111827", // Dark blue
+          "base-200": "#1F2937", // Lighter dark blue 
+          "base-300": "#374151", // Even lighter dark blue
+          info: "#3B82F6", // Blue
+          success: "#10B981", // Green
+          warning: "#F59E0B", // Orange
+          error: "#EF4444", // Red
 
-          // Brutalist style overrides
+          // Night theme overrides  
           "*": {
-            "font-family": "'IBM Plex Mono', monospace",
-          },
-          "html": {
-            "cursor": "crosshair",
+            "font-family": "'Inter', sans-serif",
           },
           ".btn": {
-            "border-radius": "0",
-            "border": "3px solid black",
-            "text-transform": "uppercase",
-            "background": "#FFFFFF",
-            "color": "#000000",
-            "box-shadow": "5px 5px 0px black",
-            "transition": "all 0.1s ease",
+            "border-radius": "0.75rem",
+            "font-weight": "500",
+            "transition": "all 0.2s ease-in-out",
+            "background": "linear-gradient(135deg, var(--neutral), var(--base-300))",
+            "border": "1px solid rgba(255,255,255,0.1)",
+            "color": "var(--base-100)",
+            "text-shadow": "0 1px 2px rgba(0,0,0,0.2)",
+            "box-shadow": "0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
             "&:hover": {
-              "transform": "translate(-2px, -2px)",
-              "box-shadow": "7px 7px 0px black",
+              "background": "linear-gradient(135deg, var(--neutral), var(--base-200))",
+              "box-shadow": "0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+              "transform": "translateY(-2px)",
             },
             "&:active": {
-              "transform": "translate(2px, 2px)",
-              "box-shadow": "3px 3px 0px black",
-            }
+              "box-shadow": "inset 0 2px 4px 0 rgba(0,0,0,0.06)",
+              "transform": "translateY(1px)",
+            },
           },
           ".card": {
-            "border": "3px solid black",
-            "border-radius": "0",
-            "box-shadow": "8px 8px 0px black",
-            "transform": "rotate(-1deg)",
+            "border-radius": "1.5rem",
+            "background": "linear-gradient(135deg, var(--base-200), var(--base-300))",
+            "border": "1px solid rgba(255,255,255,0.1)",
+            "box-shadow": "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
           },
           ".navbar": {
-            "border-bottom": "3px solid black",
-            "background": "repeating-linear-gradient(45deg, #fff, #fff 10px, #000 10px, #000 11px)",
-          },
-          ".modal": {
-            "border": "3px solid black",
-            "border-radius": "0",
-            "box-shadow": "10px 10px 0px black",
-            "transform": "rotate(1deg)",
+            "background": "linear-gradient(90deg, var(--base-100), var(--base-200))",
+            "border-bottom": "1px solid rgba(255,255,255,0.1)",
           },
           ".wallet-btn": {
-            "border": "3px solid black",
-            "background": "white",
-            "font-family": "'IBM Plex Mono', monospace",
-            "transform": "rotate(-0.5deg)",
-            "box-shadow": "4px 4px 0 black",
-            "transition": "all 0.1s ease",
+            "background": "linear-gradient(135deg, var(--primary), var(--accent))",
+            "color": "#FFFFFF",
+            "border": "none",
+            "transition": "all 0.3s ease",
+            "text-shadow": "0 2px 4px rgba(0,0,0,0.2)",
             "&:hover": {
-              "transform": "translate(-2px, -2px) rotate(-0.5deg)",
-              "box-shadow": "6px 6px 0 black",
+              "transform": "scale(1.05) rotate(2deg)",
+              "box-shadow": "0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
             },
-            "&:active": {
-              "transform": "translate(2px, 2px) rotate(-0.5deg)",
-              "box-shadow": "2px 2px 0 black",
-            }
-          }
+            "&::after": {
+              "content": "''",
+              "position": "absolute",
+              "z-index": "-1",
+              "top": "0",
+              "left": "0",
+              "width": "100%",
+              "height": "100%",
+              "opacity": "0",
+              "border-radius": "0.75rem",
+              "background": "linear-gradient(135deg, var(--secondary), var(--primary))",
+              "transition": "opacity 0.5s ease",
+            },
+            "&:hover::after": {
+              "opacity": "1",
+            },
+          },
         },
 
       }

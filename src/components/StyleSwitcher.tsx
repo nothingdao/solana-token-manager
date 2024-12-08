@@ -4,10 +4,8 @@ import { Palette } from 'lucide-react'
 import { useStyle } from './StyleContext'
 
 const styles = [
-  { name: 'Cyberpunk', value: 'cyberpunk' as const, description: 'Futuristic and bold' },
-  { name: 'Minimal', value: 'minimal' as const, description: 'Clean and simple' },
-  { name: 'Playful', value: 'playful' as const, description: 'Fun and friendly' },
-  { name: 'Brutalist', value: 'brutalist' as const, description: 'Raw and edgy' }
+  { name: 'Day', value: 'day' as const, description: 'Suns out guns out' },
+  { name: 'Night', value: 'night' as const, description: '#FFF you are blinding me... wimper' }
 ]
 
 export const StyleSwitcher: React.FC = () => {

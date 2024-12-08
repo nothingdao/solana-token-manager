@@ -5,64 +5,22 @@ import { useWallet } from '@solana/wallet-adapter-react'
 import * as React from 'react'
 import { ExternalLink } from 'lucide-react'
 import { StyleSwitcher } from './components/StyleSwitcher'
+import TokenDashboard from './components/token/TokenDashboard';
 
 const HomePage = () => {
   return (
     <div className="max-w-3xl mx-auto space-y-8">
       <section className="space-y-4">
-        <h1 className="text-3xl font-bold">Branded Solana Wallet UI Demo</h1>
+        <h1 className="text-3xl font-bold">spl-token</h1>
         <p className="text-lg">
-          This is a demonstration of a customizable Solana wallet interface that you can brand
-          to match your application's design. It features a clean, modern UI with theme support
-          and a modular component structure.
+          bla bla bla explain what this site/app is all about...
         </p>
-      </section>
-
-      <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">Quick Integration Guide</h2>
-        <div className="space-y-2">
-          <p>To integrate these components into your existing React project, you need:</p>
-
-          <div className="bg-base-200 p-4 rounded-lg space-y-4">
-            <div>
-              <h3 className="font-semibold mb-2">1. Install Dependencies</h3>
-              <code className="block bg-base-300 p-3 rounded">
-                npm install @solana/web3.js @solana/wallet-adapter-react @solana/wallet-adapter-wallets @solana/wallet-adapter-react-ui
-              </code>
-            </div>
-
-            <div>
-              <h3 className="font-semibold mb-2">2. Wrap Your App</h3>
-              <code className="block bg-base-300 p-3 rounded">
-                {`<WalletContextProvider>\n  <YourApp />\n</WalletContextProvider>`}
-              </code>
-            </div>
-
-            <div>
-              <h3 className="font-semibold mb-2">3. Use the Components</h3>
-              <code className="block bg-base-300 p-3 rounded">
-                {`import { WalletConnection } from './components/WalletConnection'\n\n// Then in your component:\n<WalletConnection />`}
-              </code>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">Features Demo</h2>
-        <ul className="list-disc list-inside space-y-2">
-          <li>Theme switching (try the paint icon up top)</li>
-          <li>Wallet connection modal with multiple wallet support</li>
-          <li>Responsive wallet button with dropdown menu</li>
-          <li>Protected content on the <a className="link" href="/dashboard">Dashboard page</a></li>
-        </ul>
       </section>
 
       <section className="bg-base-200 p-4 rounded-lg">
         <h2 className="text-xl font-semibold mb-2">Try It Out</h2>
         <p>
-          Connect your wallet and visit the <a className="link" href="/dashboard">Dashboard</a> to see the gated content demonstration.
-          The dashboard page will adapt its content based on your wallet connection state.
+          Connect your wallet and visit the <a className="link" href="/dashboard">Dashboard</a> to start woking on your spl-token.
         </p>
       </section>
 
@@ -70,7 +28,7 @@ const HomePage = () => {
         <p>
           View the full source code and documentation on{' '}
           <a
-            href="https://github.com/test-delete"
+            href="https://github.com/nothingdao"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 text-primary hover:underline"
@@ -115,7 +73,6 @@ const AuthenticatedContent = () => {
         <div className="bg-base-200 p-6 rounded-lg">
           <h2 className="text-xl font-semibold mb-2">Wallet Required</h2>
           <p className="mb-4">
-            This is an example of gated content that requires a connected wallet to view.
             Please connect your wallet using the button in the top right corner.
           </p>
           <p className="text-sm text-base-content/70">
@@ -139,13 +96,11 @@ const AuthenticatedContent = () => {
       <div className="bg-base-200 p-6 rounded-lg">
         <h2 className="text-xl font-semibold mb-2">Welcome to the Dashboard!</h2>
         <p className="mb-4">
-          This is an example of gated content that's only visible to users with a connected wallet.
           Your wallet address is: <code className="bg-base-300 px-2 py-1 rounded">{publicKey.toBase58()}</code>
         </p>
         <div className="text-sm text-base-content/70">
           <p>
-            In a real application, you could display user-specific data, transaction history,
-            or other wallet-dependent content here.
+            Let's create an spl-token. Or, let's manage one. We need to look in your wallet to select the token if you already have one and want to manage it. Or, use the new token button to create a new token!
           </p>
         </div>
       </div>
@@ -170,13 +125,12 @@ export const App: React.FC = () => {
                 Home
               </Link>
               {publicKey && (
-                <Link
-                  to='/dashboard'
-                  className='hover:text-primary'
-                >
-                  Dashboard
-                </Link>
+                <>
+                  <Link to="/dashboard" className="hover:text-primary">Dashboard</Link>
+                  <Link to="/manage-token" className="hover:text-primary">Manage Token</Link>
+                </>
               )}
+
             </div>
 
             <div className='flex-none flex items-center gap-4'>
@@ -190,6 +144,7 @@ export const App: React.FC = () => {
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/dashboard' element={<AuthenticatedContent />} />
+            <Route path="/manage-token" element={<TokenDashboard />} />
           </Routes>
         </main>
       </div>

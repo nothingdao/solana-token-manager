@@ -1,7 +1,7 @@
 // src/components/StyleContext.tsx
 import React, { createContext, useContext, useEffect, useState, FC, ReactNode } from 'react'
 
-type StyleTheme = 'cyberpunk' | 'minimal' | 'playful' | 'brutalist'
+type StyleTheme = 'day' | 'night'
 
 interface StyleContextType {
   currentStyle: StyleTheme

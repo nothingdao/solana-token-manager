@@ -11,7 +11,7 @@ export const Footer = () => {
             Built for Solana token management
           </p>
           <a
-            href="https://github.com/your-repo"
+            href="https://github.com/nothingdao/solana-token-manager"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1 text-sm text-base-content/70 hover:text-primary"

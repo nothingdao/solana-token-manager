@@ -1,79 +1,90 @@
-# solana-token-manager
+# Solana Token Manager
 
-The goal of this project is to provide a 100% comprehensive, user-friendly GUI for every imaginable feature that the spl-token and token-2022 programs offer.
+Solana Token Manager aims to be a **100% comprehensive, user-friendly GUI** for managing every feature provided by the **spl-token** and **token-2022** programs. Whether you're creating, managing, or analyzing Solana tokens, this application will serve as an all-in-one solution for both developers and non-technical users.
 
-## Todo
+---
+
+## Features
 
 ### Token Creation
 
-- [ ] Create new tokens with custom decimals, initial supply, and metadata
-- [ ] Set mint and freeze authorities
-- [ ] Create fixed supply or mintable tokens
-- [ ] Implement token metadata (name, symbol, logo, description)
-- [ ] Support on-chain and off-chain metadata storage (e.g., Arweave)
+Manage every aspect of token creation with ease:
+
+- [ ] Create tokens with custom settings (decimals, initial supply, metadata).
+- [ ] Configure mint and freeze authorities.
+- [ ] Support for fixed supply or mintable tokens.
+- [ ] Define metadata such as name, symbol, logo, and description.
+- [ ] Store metadata on-chain or off-chain (e.g., Arweave).
 
 ### Token Management
 
-- [ ] Mint additional tokens to a specified account
-- [ ] Burn tokens from a specified account
-- [ ] Transfer tokens between accounts
-- [ ] Set transfer fees and transfer fee accounts
-- [ ] Enable/disable minting after token creation
-- [ ] Set maximum supply for mintable tokens
+Comprehensive tools for managing token supplies and settings:
+
+- [ ] Mint new tokens to any account.
+- [ ] Burn tokens from any account.
+- [ ] Transfer tokens securely between accounts.
+- [ ] Configure transfer fees and fee accounts.
+- [ ] Enable/disable minting after token creation.
+- [ ] Set a maximum supply for mintable tokens.
 
 ### Token Accounts
 
-- [ ] Create and manage token accounts
-- [ ] Set account owners, delegates, and close authorities
-- [ ] Close accounts and retrieve rent-exempt balances
-- [ ] View token account details (balance, mint, owner, delegates, authorities)
-- [ ] Display transaction history for token accounts
+Easily create and manage token accounts:
 
-### Token Extensions (token-2022)
+- [ ] Create accounts and set owners, delegates, and authorities.
+- [ ] Close accounts and reclaim rent-exempt balances.
+- [ ] View detailed account information (balances, owner, mint, authorities).
+- [ ] Track transaction history for each account.
 
-- [ ] Confidential transfers
-  - [ ] Implement confidential transfer minting and transfer operations
-  - [ ] Support confidential transfer account creation and management
-- [ ] Default account state
-  - [ ] Enable/disable default account state for a mint
-  - [ ] Manage account state (frozen, unfrozen) with default account state extension
-- [ ] Immutable ownership
-  - [ ] Enable/disable immutable ownership for a token account
-- [ ] Memo transfers
-  - [ ] Support adding memos to token transfers
-- [ ] Non-transferable tokens
-  - [ ] Enable/disable non-transferable flag for a mint
-- [ ] Permanent delegate
-  - [ ] Set permanent delegates for token accounts
-- [ ] Reallocate
-  - [ ] Support reallocating token account balances
-- [ ] Interest-bearing tokens
-  - [ ] Implement interest-bearing token minting and transfer operations
-  - [ ] Calculate and display accrued interest for token accounts
-- [ ] Transfer fees
-  - [ ] Enable/disable transfer fees for a mint
-  - [ ] Set and manage transfer fee amounts and recipients
+---
 
-### User Interface
+## Token-2022 Extensions
 
-- [ ] Implement a responsive, mobile-friendly design
-- [ ] Optimize for accessibility (keyboard navigation, ARIA attributes, color contrast)
-- [ ] Integrate with popular wallet providers (Phantom, Solflare, etc.)
-- [ ] Display user-friendly error messages and validation feedback
-- [ ] Provide clear guidance and tooltips for complex operations
+We aim to provide full support for **token-2022** extensions. Any features not currently supported will be added to ensure feature parity.
 
-### Security and Performance
+- **Confidential Transfers**
+  - [ ] Support confidential minting and transfers.
+  - [ ] Manage confidential accounts.
+- **Default Account State**
+  - [ ] Configure and manage default states (frozen/unfrozen) for accounts.
+- **Immutable Ownership**
+  - [ ] Enable/disable immutable ownership of token accounts.
+- **Memo Transfers**
+  - [ ] Add memos to token transfers.
+- **Non-transferable Tokens**
+  - [ ] Configure tokens as non-transferable.
+- **Permanent Delegate**
+  - [ ] Set permanent delegates for accounts.
+- **Reallocate**
+  - [ ] Adjust token account allocations dynamically.
+- **Interest-bearing Tokens**
+  - [ ] Create interest-bearing tokens and track accrued interest.
+- **Transfer Fees**
+  - [ ] Enable/disable transfer fees and manage recipients.
 
-- [ ] Conduct thorough testing and auditing of all features
-- [ ] Optimize for performance and minimize transaction costs
-- [ ] Implement secure transaction signing and verification
-- [ ] Follow best practices for error handling and user input validation
+---
 
 ## Future Enhancements
 
-- [ ] Implement a token swap interface
-- [ ] Integrate with popular DEXes and liquidity pools
-- [ ] Support token staking and rewards programs
-- [ ] Enable token vesting and time-locked distributions
-- [ ] Implement a token airdrop feature
-- [ ] Provide tools for token data analysis and visualization
+Envisioning a broader scope for token utility:
+
+- [ ] Token Swap: Simplify token swaps with a dedicated interface.
+- [ ] DEX Integration: Connect to popular DEXes and liquidity pools.
+- [ ] Staking & Rewards: Support staking programs and reward distributions.
+- [ ] Vesting & Timelocks: Enable time-locked token distributions.
+- [ ] Airdrop Tool: Simplify token airdrops to multiple addresses.
+- [ ] Data Analysis: Visualize token data with built-in analytics tools.
+
+---
+
+## Contributing
+
+We welcome contributions from the community! If you'd like to help, please:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix.
+3. Submit a pull request with a detailed explanation of your changes.
+
+---
+
+By refining and expanding this README, we’ve made it more engaging, professional, and easier for users to understand the project's scope. Let me know if you'd like further adjustments!

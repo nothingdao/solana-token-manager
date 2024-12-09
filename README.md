@@ -61,7 +61,6 @@ The goal of this project is to provide a 100% comprehensive, user-friendly GUI f
 - [ ] Integrate with popular wallet providers (Phantom, Solflare, etc.)
 - [ ] Display user-friendly error messages and validation feedback
 - [ ] Provide clear guidance and tooltips for complex operations
-- [ ] Implement a dark mode theme
 
 ### Security and Performance
 

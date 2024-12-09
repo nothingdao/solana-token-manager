@@ -1,6 +1,6 @@
 // src/components/token/TokenInfo.tsx
 import React from 'react';
-import { TokenInfo as TokenInfoType } from '../types';
+import { TokenInfo as TokenInfoType } from '../../../../types/token'
 
 interface TokenInfoProps {
   tokenInfo: TokenInfoType;

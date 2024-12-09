@@ -1,50 +1,51 @@
-// src/components/token/TokenDashboard.tsx
+// src/components/token/TokenDashboard/index.tsx
 import React, { useEffect, useState } from 'react';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import { TOKEN_PROGRAM_ID, getMint, type Mint } from '@solana/spl-token'; import { Connection, PublicKey } from '@solana/web3.js';
-import { RefreshCw } from 'lucide-react';
-import { TokenMint } from './TokenMint';
-import { TokenInfo as TokenInfoDisplay } from './TokenInfo';
-import { TokenActions } from './TokenActions';
-import { TokenInfo } from './types';
+import { getMint, type Mint } from '@solana/spl-token';
+import { Connection, PublicKey } from '@solana/web3.js';
+import { RefreshCw, Plus } from 'lucide-react';
+import { TokenCreate } from '../../creation/TokenCreateForm';
+import { useNavigate } from 'react-router-dom';
 
-const getUserTokens = async (
+const HELIUS_API_KEY = 'de157aa3-5580-4245-8190-d94722fbbec5';
+
+const getAssetsByAuthority = async (
   connection: Connection,
   userPublicKey: PublicKey
 ): Promise<{ address: string; info: Mint }[]> => {
-
   try {
-    // Get all token accounts owned by the user
-    const accounts = await connection.getParsedProgramAccounts(
-      TOKEN_PROGRAM_ID,
-      {
-        filters: [
-          {
-            dataSize: 82  // Size of mint account data
-          },
-          {
-            memcmp: {
-              offset: 4,  // Offset of mint authority data
-              bytes: userPublicKey.toBase58()
-            }
-          }
-        ]
-      }
-    );
+    const response = await fetch('https://devnet.helius-rpc.com/?api-key=' + HELIUS_API_KEY, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        jsonrpc: '2.0',
+        id: 'my-id',
+        method: 'getAssetsByAuthority',
+        params: {
+          authorityAddress: userPublicKey.toBase58(),
+          page: 1,
+          limit: 1000
+        },
+      }),
+    });
 
-    // Get mint info for each token
+    const { result } = await response.json();
+    console.log("Assets by Authority: ", result);
+
     const tokens = await Promise.all(
-      accounts.map(async (account) => {
-        const mintInfo = await getMint(connection, account.pubkey);
+      result.items.map(async (asset: any) => {
+        const mintAddress = new PublicKey(asset.id);
+        const mintInfo = await getMint(connection, mintAddress);
         return {
-          address: account.pubkey.toBase58(),
+          address: mintAddress.toBase58(),
           info: mintInfo
         };
       })
     );
 
     return tokens;
-
   } catch (error) {
     console.error('Error fetching user tokens:', error);
     return [];
@@ -54,17 +55,16 @@ const getUserTokens = async (
 export const TokenDashboard = () => {
   const { connection } = useConnection();
   const { publicKey } = useWallet();
-  const [tokenInfo, setTokenInfo] = useState<TokenInfo | null>(null);
   const [mintAddress, setMintAddress] = useState('');
   const [loading, setLoading] = useState(false);
   const [showMintForm, setShowMintForm] = useState(false);
   const [userTokens, setUserTokens] = useState<{ address: string; info: Mint }[]>([]);
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (publicKey && connection) {
       const fetchUserTokens = async () => {
-        const tokens = await getUserTokens(connection, publicKey);
+        const tokens = await getAssetsByAuthority(connection, publicKey);
         setUserTokens(tokens);
       };
 
@@ -72,31 +72,16 @@ export const TokenDashboard = () => {
     }
   }, [publicKey, connection]);
 
-  const fetchTokenInfo = async (address: string) => {
+  const handleMintAddressSubmit = async (address: string) => {
     try {
       setLoading(true);
-      const mint = await getMint(connection, new PublicKey(address));
-
-      setTokenInfo({
-        address,
-        decimals: mint.decimals,
-        supply: mint.supply.toString(),
-        mintAuthority: mint.mintAuthority?.toBase58() || null,
-        freezeAuthority: mint.freezeAuthority?.toBase58() || null
-      });
+      await getMint(connection, new PublicKey(address));
+      navigate(`/tokens/${address}`);
     } catch (error) {
-      console.error('Error fetching token info:', error);
+      console.error('Error verifying token:', error);
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleTransfer = async (recipient: string, amount: string) => {
-    // Your existing transfer logic
-  };
-
-  const handleBurn = async (amount: string) => {
-    // Your existing burn logic
   };
 
   return (
@@ -108,16 +93,22 @@ export const TokenDashboard = () => {
             onClick={() => setShowMintForm(!showMintForm)}
             className="btn btn-primary"
           >
-            {showMintForm ? 'Cancel' : 'Create New Token'}
+            {showMintForm ? (
+              'Cancel'
+            ) : (
+              <>
+                <Plus className="w-4 h-4 mr-2" />
+                Create New Token
+              </>
+            )}
           </button>
         </div>
 
         {showMintForm ? (
-          <TokenMint
+          <TokenCreate
             onSuccess={(address) => {
-              setMintAddress(address);
-              fetchTokenInfo(address);
               setShowMintForm(false);
+              navigate(`/tokens/${address}`);
             }}
           />
         ) : (
@@ -128,7 +119,7 @@ export const TokenDashboard = () => {
                 onChange={(e) => {
                   setMintAddress(e.target.value);
                   if (e.target.value) {
-                    fetchTokenInfo(e.target.value);
+                    navigate(`/tokens/${e.target.value}`);
                   }
                 }}
                 className="select select-bordered flex-1"
@@ -148,23 +139,13 @@ export const TokenDashboard = () => {
                 className="input input-bordered flex-1"
               />
               <button
-                onClick={() => mintAddress && fetchTokenInfo(mintAddress)}
+                onClick={() => mintAddress && handleMintAddressSubmit(mintAddress)}
                 disabled={loading || !mintAddress}
                 className="btn btn-square btn-primary"
               >
                 <RefreshCw className="w-4 h-4" />
               </button>
             </div>
-
-            {tokenInfo && (
-              <>
-                <TokenInfoDisplay tokenInfo={tokenInfo} />
-                <TokenActions
-                  onTransfer={handleTransfer}
-                  onBurn={handleBurn}
-                />
-              </>
-            )}
           </div>
         )}
       </section>

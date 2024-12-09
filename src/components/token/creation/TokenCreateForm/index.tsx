@@ -1,7 +1,8 @@
-// src/components/token/TokenMint.tsx
+// src/components/token/creation/TokenCreateForm/index.tsx
 import React, { useState } from 'react';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import * as token from '@solana/spl-token';
+import { TOKEN_2022_PROGRAM_ID } from '@solana/spl-token';
 import {
   Keypair,
   PublicKey,
@@ -10,8 +11,9 @@ import {
   clusterApiUrl
 } from '@solana/web3.js';
 import { AlertCircle } from 'lucide-react';
+import { showTokenNotification } from '../../../../utils/notifications';
 
-interface TokenMintProps {
+interface TokenCreateProps {
   onSuccess: (mintAddress: string) => void;
 }
 
@@ -26,7 +28,7 @@ interface MintFormData {
   customFreezeAuthority: string;
 }
 
-export const TokenMint: React.FC<TokenMintProps> = ({ onSuccess }) => {
+export const TokenCreate: React.FC<TokenCreateProps> = ({ onSuccess }) => {
   const { connection } = useConnection();
   const { publicKey, sendTransaction } = useWallet();
   const [loading, setLoading] = useState(false);
@@ -124,22 +126,24 @@ export const TokenMint: React.FC<TokenMintProps> = ({ onSuccess }) => {
           newAccountPubkey: mintKeypair.publicKey,
           space: token.MINT_SIZE,
           lamports: mintRent,
-          programId: token.TOKEN_PROGRAM_ID,
+          programId: TOKEN_2022_PROGRAM_ID,
         }),
-        token.createInitializeMintInstruction(
+        token.createInitializeMint2Instruction(
           mintKeypair.publicKey,
           formData.decimals,
           mintAuthority || publicKey,
           freezeAuthority,
-          token.TOKEN_PROGRAM_ID
+          TOKEN_2022_PROGRAM_ID // Pass the token-2022 program ID
         )
       );
 
-      // If initial supply > 0, create ATA and mint tokens
+      // If initial supply > 0, ensure ATAs are created using the 2022 methods
       if (Number(formData.initialSupply) > 0) {
         const associatedToken = await token.getAssociatedTokenAddress(
           mintKeypair.publicKey,
-          publicKey
+          publicKey,
+          false, // Don't force legacy
+          TOKEN_2022_PROGRAM_ID // Specify token-2022 program
         );
 
         transaction.add(
@@ -147,13 +151,16 @@ export const TokenMint: React.FC<TokenMintProps> = ({ onSuccess }) => {
             publicKey,
             associatedToken,
             publicKey,
-            mintKeypair.publicKey
+            mintKeypair.publicKey,
+            TOKEN_2022_PROGRAM_ID
           ),
           token.createMintToInstruction(
             mintKeypair.publicKey,
             associatedToken,
             mintAuthority || publicKey,
-            BigInt(Number(formData.initialSupply) * Math.pow(10, formData.decimals))
+            BigInt(Number(formData.initialSupply) * Math.pow(10, formData.decimals)),
+            [],
+            TOKEN_2022_PROGRAM_ID // Pass the token-2022 program ID
           )
         );
       }
@@ -161,15 +168,32 @@ export const TokenMint: React.FC<TokenMintProps> = ({ onSuccess }) => {
       const signature = await sendTransaction(transaction, connection, {
         signers: [mintKeypair],
       });
+      console.log('Token Creation Transaction:', {
+        signature,
+        mintAddress: mintKeypair.publicKey.toBase58(),
+        decimals: formData.decimals,
+        initialSupply: formData.initialSupply
+      });
 
-      await connection.confirmTransaction(signature);
+      await connection.confirmTransaction({
+        signature,
+        blockhash: (await connection.getLatestBlockhash()).blockhash,
+        lastValidBlockHeight: (await connection.getLatestBlockhash()).lastValidBlockHeight
+      });
+
+      showTokenNotification.creation({
+        signature,
+        mintAddress: mintKeypair.publicKey.toBase58(),
+        decimals: formData.decimals,
+        initialSupply: formData.initialSupply
+      });
+
       onSuccess(mintKeypair.publicKey.toBase58());
-
     } catch (err) {
       console.error('Error creating token:', err);
-      setError(err instanceof Error ? err.message : 'Failed to create token');
-    } finally {
-      setLoading(false);
+      const errorMessage = err instanceof Error ? err.message : 'Failed to create token';
+      showTokenNotification.error(errorMessage);
+      setError(errorMessage);
     }
   };
 

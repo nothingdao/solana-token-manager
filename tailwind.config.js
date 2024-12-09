@@ -5,14 +5,44 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: [
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "system-ui",
+          "Segoe UI",
+          "Roboto",
+          "Helvetica Neue",
+          "Arial",
+          "Noto Sans",
+          "sans-serif",
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+          "Noto Color Emoji",
+        ],
+        mono: [
+          "SF Mono",
+          "ui-monospace",
+          "SFMono-Regular",
+          "Menlo",
+          "Monaco",
+          "Consolas",
+          "Liberation Mono",
+          "Courier New",
+          "monospace"
+        ],
+      },
+    },
   },
   plugins: [require("daisyui")],
   daisyui: {
     themes: [
       {
         day: {
-          primary: "#FF5A5F",
+          primary: "#111",
           secondary: "#00C2E0",
           accent: "#FFCA28",
           neutral: "#303841",
@@ -25,11 +55,8 @@ export default {
           error: "#ED4A31",
 
           // Day theme overrides
-          "*": {
-            "font-family": "'Poppins', sans-serif",
-          },
           ".btn": {
-            "border-radius": "0.5rem",
+            "border-radius": "0.35rem",
             "text-transform": "uppercase",
             "font-weight": "600",
             "transition": "all 0.3s ease",
@@ -62,24 +89,21 @@ export default {
         },
 
         night: {
-          primary: "#8B5CF6", // Purple
-          secondary: "#22D3EE", // Cyan
-          accent: "#FBBF24", // Yellow
-          neutral: "#4B5563", // Gray
-          "base-100": "#111827", // Dark blue
-          "base-200": "#1F2937", // Lighter dark blue 
-          "base-300": "#374151", // Even lighter dark blue
-          info: "#3B82F6", // Blue
-          success: "#10B981", // Green
-          warning: "#F59E0B", // Orange
-          error: "#EF4444", // Red
+          primary: "#A3A3A3", // Light Gray (for Purple)
+          secondary: "#B8B8B8", // Lighter Gray (for Cyan)
+          accent: "#D4D4D4", // Pale Gray (for Yellow)
+          neutral: "#4B4B4B", // Dark Gray (unchanged)
+          "base-100": "#121212", // Near Black (for Dark Blue)
+          "base-200": "#1C1C1C", // Darker Gray (for Lighter Dark Blue)
+          "base-300": "#2E2E2E", // Medium Dark Gray (for Even Lighter Dark Blue)
+          info: "#8C8C8C", // Medium Gray (for Blue)
+          success: "#5E5E5E", // Dim Gray (for Green)
+          warning: "#787878", // Gray (for Orange)
+          error: "#6F6F6F", // Darker Gray (for Red)
 
           // Night theme overrides  
-          "*": {
-            "font-family": "'Inter', sans-serif",
-          },
           ".btn": {
-            "border-radius": "0.75rem",
+            "border-radius": "0.35rem",
             "font-weight": "500",
             "transition": "all 0.2s ease-in-out",
             "background": "linear-gradient(135deg, var(--neutral), var(--base-300))",
@@ -135,6 +159,7 @@ export default {
             },
           },
         },
+
 
       }
     ]

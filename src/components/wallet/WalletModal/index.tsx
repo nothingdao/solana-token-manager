@@ -3,11 +3,7 @@ import * as React from 'react'
 import { useWallet } from '@solana/wallet-adapter-react'
 import { X } from 'lucide-react'
 import { WalletReadyState } from '@solana/wallet-adapter-base'
-
-interface WalletModalProps {
-  isOpen: boolean
-  onClose: () => void
-}
+import { WalletModalProps } from '../../../types/common'
 
 export const WalletModal: React.FC<WalletModalProps> = ({ isOpen, onClose }) => {
   const { wallets, select } = useWallet()

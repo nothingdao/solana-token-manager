@@ -1,11 +1,22 @@
 // src/App.tsx
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import { WalletConnection } from './components/WalletConnection'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Toaster } from 'sonner'
+
+import { MainLayout } from './components/layout/MainLayout'
+import TokenDashboard from './components/token/management/TokenDashboard'
 import { useWallet } from '@solana/wallet-adapter-react'
 import * as React from 'react'
 import { ExternalLink } from 'lucide-react'
-import { StyleSwitcher } from './components/StyleSwitcher'
-import TokenDashboard from './components/token/TokenDashboard';
+
+// Token Components
+import { TokenDetails } from './components/token/management/TokenDetails'
+import { TokenMint } from './components/token/management/TokenMint'
+import { TokenBurn } from './components/token/management/TokenBurn'
+import { TokenTransfer } from './components/token/management/TokenTransfer'
+import { AccountList } from './components/token/accounts/AccountList'
+import TokenMetadata from './components/token/management/TokenMetadata'
+import { TokenExtensions } from './components/token/extensions/TokenExtensions'
+
 
 const HomePage = () => {
   return (
@@ -20,7 +31,7 @@ const HomePage = () => {
       <section className="bg-base-200 p-4 rounded-lg">
         <h2 className="text-xl font-semibold mb-2">Try It Out</h2>
         <p>
-          Connect your wallet and visit the <a className="link" href="/dashboard">Dashboard</a> to start woking on your spl-token.
+          Connect your wallet and visit the <a className="link" href="/dashboard">Dashboard</a> to start working on your spl-token.
         </p>
       </section>
 
@@ -37,11 +48,10 @@ const HomePage = () => {
           </a>
         </p>
       </section>
-    </div>
+    </div >
   )
 }
 
-// Enhanced AuthenticatedContent component
 const AuthenticatedContent = () => {
   const { publicKey, connecting, disconnecting } = useWallet()
 
@@ -87,7 +97,7 @@ const AuthenticatedContent = () => {
             </a>
           </p>
         </div>
-      </div>
+      </div >
     )
   }
 
@@ -112,42 +122,36 @@ export const App: React.FC = () => {
   const { publicKey } = useWallet()
 
   return (
-
     <Router>
-      <div className='min-h-screen bg-base-100 text-base-content'>
-        <nav className='navbar bg-base-200 p-4'>
-          <div className='container mx-auto'>
-            <div className='flex-1 flex items-center gap-4'>
-              <Link
-                to='/'
-                className='flex items-center gap-2 hover:text-primary'
-              >
-                Home
-              </Link>
-              {publicKey && (
-                <>
-                  <Link to="/dashboard" className="hover:text-primary">Dashboard</Link>
-                  <Link to="/manage-token" className="hover:text-primary">Manage Token</Link>
-                </>
-              )}
+      <Toaster
+        position="bottom-left"      // position on screen
+        expand={false}           // expand to show multiple toasts
+        duration={6000}      // stays until dismissed
+        closeButton             // adds a close button
+        pauseWhenPageIsHidden   // pauses duration when tab is hidden
+      />
+      <Routes>
+        <Route element={<MainLayout />}>  {/* Use MainLayout as wrapper route */}
 
-            </div>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/dashboard" element={<AuthenticatedContent />} />
+          <Route path="/manage-token" element={<TokenDashboard />} />
 
-            <div className='flex-none flex items-center gap-4'>
-              <StyleSwitcher />
-              <WalletConnection />
-            </div>
-          </div>
-        </nav>
-
-        <main className='container mx-auto p-4'>
-          <Routes>
-            <Route path='/' element={<HomePage />} />
-            <Route path='/dashboard' element={<AuthenticatedContent />} />
-            <Route path="/manage-token" element={<TokenDashboard />} />
-          </Routes>
-        </main>
-      </div>
+          {/* New Token Routes */}
+          <Route path="/tokens">
+            <Route index element={<TokenDashboard />} />
+            <Route path=":mintId">
+              <Route index element={<TokenDetails />} />
+              <Route path="mint" element={<TokenMint />} />
+              <Route path="burn" element={<TokenBurn />} />
+              <Route path="transfer" element={<TokenTransfer />} />
+              <Route path="accounts" element={<AccountList />} />
+              <Route path="metadata" element={<TokenMetadata />} /> {/* New route */}
+              <Route path="extensions" element={<TokenExtensions />} />
+            </Route>
+          </Route>
+        </Route>
+      </Routes>
     </Router>
   )
 }

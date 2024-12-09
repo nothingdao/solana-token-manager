@@ -3,7 +3,7 @@ import * as React from 'react'
 import { useWallet } from '@solana/wallet-adapter-react'
 import { ChevronDown, Wallet, LogOut, Settings, History } from 'lucide-react'
 import { PublicKey } from '@solana/web3.js'
-import { WalletModal } from './WalletModal'
+import { WalletModal } from '../../../wallet/WalletModal'
 
 export const WalletConnection: React.FC = () => {
   const { publicKey, connected, disconnect } = useWallet()

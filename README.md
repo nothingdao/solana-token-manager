@@ -1,4 +1,4 @@
-# spl-token-gui
+# solana-token-manager
 
 The goal of this project is to provide a 100% comprehensive, user-friendly GUI for every imaginable feature that the spl-token and token-2022 programs offer.
 
@@ -28,12 +28,6 @@ The goal of this project is to provide a 100% comprehensive, user-friendly GUI f
 - [ ] Close accounts and retrieve rent-exempt balances
 - [ ] View token account details (balance, mint, owner, delegates, authorities)
 - [ ] Display transaction history for token accounts
-
-### Multisignature
-
-- [ ] Create and manage multisignature accounts
-- [ ] Set signers and thresholds for token operations
-- [ ] Implement multisignature transaction approval
 
 ### Token Extensions (token-2022)
 

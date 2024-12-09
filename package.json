@@ -1,5 +1,5 @@
 {
-  "name": "solana-wallet-ui-branded",
+  "name": "solana-token-manager",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,8 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
     "@metaplex-foundation/js": "^0.20.1",
-    "@solana/spl-token": "^0.3.8",
+    "@metaplex-foundation/mpl-token-metadata": "^3.3.0",
+    "@solana/spl-token": "^0.4.9",
     "@solana/wallet-adapter-base": "^0.9.23",
     "@solana/wallet-adapter-react": "^0.15.35",
     "@solana/wallet-adapter-react-ui": "^0.9.35",
@@ -22,7 +24,8 @@
     "lucide-react": "^0.462.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^7.0.1"
+    "react-router-dom": "^7.0.1",
+    "sonner": "^1.7.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",

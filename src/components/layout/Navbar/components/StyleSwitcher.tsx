@@ -1,16 +1,28 @@
 // src/components/StyleSwitcher.tsx
 import React from 'react'
-import { Palette } from 'lucide-react'
-import { useStyle } from './StyleContext'
+import { Sun, Moon } from 'lucide-react'
+import { useStyle } from '../../../../contexts/StyleContext'
 
 const styles = [
-  { name: 'Day', value: 'day' as const, description: 'Suns out guns out' },
-  { name: 'Night', value: 'night' as const, description: '#FFF you are blinding me... wimper' }
+  { name: 'Day', value: 'day', description: 'Suns out guns out' },
+  { name: 'Night', value: 'night', description: '#FFFFFF you are blinding me!' },
+  { name: 'System', value: 'system', description: 'Follow system settings' }
 ]
 
 export const StyleSwitcher: React.FC = () => {
   const [isOpen, setIsOpen] = React.useState(false)
   const { currentStyle, setStyle } = useStyle()
+
+  // Determine which icon to show based on the currentStyle
+  const getIcon = () => {
+    if (currentStyle === 'day') return <Sun className="w-4 h-4" />
+    if (currentStyle === 'night') return <Moon className="w-4 h-4" />
+    if (currentStyle === 'system') {
+      const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+      return isSystemDark ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />
+    }
+    return <Sun className="w-4 h-4" /> // Default to day
+  }
 
   return (
     <div className="relative">
@@ -19,7 +31,7 @@ export const StyleSwitcher: React.FC = () => {
         className="btn btn-sm btn-ghost"
         aria-label="Change style"
       >
-        <Palette className="w-4 h-4" />
+        {getIcon()}
       </button>
 
       {isOpen && (
@@ -29,7 +41,7 @@ export const StyleSwitcher: React.FC = () => {
               <button
                 key={style.value}
                 onClick={() => {
-                  setStyle(style.value)
+                  setStyle(style.value as any)
                   setIsOpen(false)
                 }}
                 className={`w-full p-2 text-left hover:bg-base-300 rounded-lg transition-colors flex flex-col

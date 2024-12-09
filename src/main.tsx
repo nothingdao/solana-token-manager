@@ -3,8 +3,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import { App } from './App'
-import { WalletContextProvider } from './components/WalletContext'
-import { StyleProvider } from './components/StyleContext'
+import { WalletContextProvider } from './contexts/WalletContext'
+import { StyleProvider } from './contexts/StyleContext'
 
 // Add Buffer polyfill
 import { Buffer } from 'buffer';

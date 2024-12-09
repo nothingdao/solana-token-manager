@@ -86,5 +86,3 @@ We welcome contributions from the community! If you'd like to help, please:
 3. Submit a pull request with a detailed explanation of your changes.
 
 ---
-
-By refining and expanding this README, we’ve made it more engaging, professional, and easier for users to understand the project's scope. Let me know if you'd like further adjustments!

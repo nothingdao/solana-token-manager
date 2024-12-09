@@ -46,7 +46,7 @@ export const WalletConnection: React.FC = () => {
           {isDropdownOpen && (
             <div className="absolute right-0 mt-2 w-48 rounded-lg bg-base-200 shadow-xl z-50">
               <ul className="py-2">
-                <li>
+                {/* <li>
                   <button
                     onClick={() => {
                       console.log('Transaction History clicked')
@@ -69,7 +69,7 @@ export const WalletConnection: React.FC = () => {
                     <Settings className="w-4 h-4" />
                     Settings
                   </button>
-                </li>
+                </li> */}
                 <li className="border-t border-base-300">
                   <button
                     onClick={() => {
